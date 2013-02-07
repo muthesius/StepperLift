@@ -129,7 +129,7 @@ void loop() {
     }
   }
 
-  if(digitalRead(highFuse, HIGH) || digitalRead(lowFuse,HIGH) {
+  if(digitalRead(highFuse, HIGH) || digitalRead(lowFuse,HIGH)) {
     setDirection(0);
   }
 
