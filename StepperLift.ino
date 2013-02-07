@@ -62,7 +62,9 @@ void stepTurns(float turns) {
   }
 }
 
+static int direction = 0;
 void setDirection(int dir) {
+  direction = dir;
   if (dir > 0) {
     enableAll();
     digitalWrite(11,LOW);
@@ -74,6 +76,14 @@ void setDirection(int dir) {
   else if(dir==0) {
     disableAll();
   }
+}
+
+bool atUpperEnd(){
+  return direction > 0 && digitalRead(highFuse, HIGH);
+}
+
+bool atLowerEnd(){
+  return direction < 0 && digitalRead(lowFuse, HIGH);
 }
 
 
@@ -129,7 +139,8 @@ void loop() {
     }
   }
 
-  if(digitalRead(highFuse, HIGH) || digitalRead(lowFuse,HIGH)) {
+  if( atUpperEnd() || atLowerEnd() ) {
+    // Stop the movement
     setDirection(0);
   }
 
