@@ -78,11 +78,11 @@ void setDirection(int dir) {
   }
 }
 
-bool atUpperEnd(){
+boolean atUpperEnd(){
   return direction > 0 && digitalRead(highFuse, HIGH);
 }
 
-bool atLowerEnd(){
+boolean atLowerEnd(){
   return direction < 0 && digitalRead(lowFuse, HIGH);
 }
 
