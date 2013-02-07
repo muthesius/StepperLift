@@ -12,6 +12,10 @@ const int torque = 0;
 static int stepSize = 16;
 static bool run = false;
 
+// bound detection pins:
+const int highFuse = 2;
+const int lowFuse = 3;
+
 void disableAll() {
   digitalWrite(6, HIGH);
   digitalWrite(7, HIGH);
@@ -76,6 +80,9 @@ void setDirection(int dir) {
 void setup() {
   Serial.begin(9600);
   
+  pinMode(highFuse,INPUT);
+  pinMode(lowFuse,INPUT);
+
   intSteppers();
   
   pinMode(11,OUTPUT);
@@ -85,7 +92,6 @@ void setup() {
 }
 
 void loop() {
-
   if(Serial.available()) {
     char cmd = Serial.read();
     switch (cmd) {
@@ -122,7 +128,11 @@ void loop() {
         break;
     }
   }
-  
+
+  if(digitalRead(highFuse, HIGH) || digitalRead(lowFuse,HIGH) {
+    setDirection(0);
+  }
+
   stepTurns(1);
   
 }
